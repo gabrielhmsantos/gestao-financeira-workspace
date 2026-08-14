@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Controle de Despesas — Ciclo de vida da Despesa (M2)
+  version: 0.1.0
+  description: Contratos lógicos create/update/archive (Server Actions equivalentes).
+paths:
+  /despesas:
+    post:
+      operationId: createExpense
+      summary: Cadastrar Despesa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseInput"
+      responses:
+        "201":
+          description: Despesa Ativa criada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expense"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /despesas/{id}:
+    patch:
+      operationId: updateExpense
+      summary: Editar Despesa Ativa
+      parameters:
+        - $ref: "#/components/parameters/ExpenseId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseInput"
+      responses:
+        "200":
+          description: Atualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expense"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          description: Despesa Arquivada
+    post:
+      operationId: archiveExpense
+      summary: Arquivar Despesa
+      parameters:
+        - $ref: "#/components/parameters/ExpenseId"
+      responses:
+        "200":
+          description: Arquivada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expense"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          description: Já arquivada
+components:
+  parameters:
+    ExpenseId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Category:
+      type: string
+      enum: [ALIMENTACAO, TRANSPORTE, MORADIA, SAUDE, LAZER, EDUCACAO, OUTROS]
+    ExpenseInput:
+      type: object
+      required: [description, amountCents, date, category]
+      properties:
+        description:
+          type: string
+          minLength: 1
+        amountCents:
+          type: integer
+          minimum: 1
+        date:
+          type: string
+          format: date
+        category:
+          $ref: "#/components/schemas/Category"
+    Expense:
+      type: object
+      required: [id, description, amountCents, date, category, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        description:
+          type: string
+        amountCents:
+          type: integer
+        date:
+          type: string
+          format: date
+        category:
+          $ref: "#/components/schemas/Category"
+        status:
+          type: string
+          enum: [Ativa, Arquivada]
+        archivedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+  responses:
+    BadRequest:
+      description: Validação
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Unauthorized:
+      description: Não autenticado
+    NotFound:
+      description: Não encontrado ou não pertencente ao usuário

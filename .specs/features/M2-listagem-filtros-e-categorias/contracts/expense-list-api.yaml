@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: Controle de Despesas — Listagem e filtros (M2)
+  version: 0.1.0
+paths:
+  /despesas:
+    get:
+      operationId: listExpenses
+      summary: Listar Despesas Ativas com filtros
+      parameters:
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: category
+          in: query
+          schema:
+            $ref: "#/components/schemas/Category"
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        "200":
+          description: Página de Despesas Ativas do usuário
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseListResponse"
+        "400":
+          description: Período inválido
+        "401":
+          description: Não autenticado
+  /categorias:
+    get:
+      operationId: listCategories
+      summary: Catálogo fixo de Categorias
+      responses:
+        "200":
+          description: Lista imutável do MVP
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CategoryItem"
+components:
+  schemas:
+    Category:
+      type: string
+      enum: [ALIMENTACAO, TRANSPORTE, MORADIA, SAUDE, LAZER, EDUCACAO, OUTROS]
+    CategoryItem:
+      type: object
+      required: [id, label]
+      properties:
+        id:
+          $ref: "#/components/schemas/Category"
+        label:
+          type: string
+    ExpenseListItem:
+      type: object
+      required: [id, description, amountCents, date, category]
+      properties:
+        id:
+          type: string
+          format: uuid
+        description:
+          type: string
+        amountCents:
+          type: integer
+        date:
+          type: string
+          format: date
+        category:
+          $ref: "#/components/schemas/Category"
+    ExpenseListResponse:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpenseListItem"
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        total:
+          type: integer

@@ -1,7 +1,7 @@
 # Estado
 
 **Última atualização:** 2026-08-14
-**Trabalho atual:** Init concluído — próximo: `coe-sdd-plan M0`
+**Trabalho atual:** Planejamento MVP completo (M0–M3). Próximo: `coe-sdd-implement M0-bootstrap` em `apps/web` (branch `feat/M0-bootstrap`).
 
 ---
 
@@ -22,6 +22,45 @@
 **Foundation:** —
 **Trade-off:** Diferente do default do skill (`feat/{feature-folder}`); com várias features no mesmo marco, a branch é por marco.
 **Impacto:** Rule IDE e implement usam este padrão; branches só em `apps/web`.
+
+### AD-003: Prisma + Vitest + health `/api/health` no M0 (2026-08-14)
+
+**Decisão:** Bootstrap usa Prisma/SQLite (schema sem domínio), Vitest, npm e `GET /api/health`; Auth.js e entidades de produto ficam para M1+.
+**Motivo:** Entregar executabilidade e persistência sem antecipar escopo de autenticação/despesas.
+**Foundation:** STACK.md
+**Trade-off:** Troca futura de ORM exigiria migração de schema; aceitável no MVP.
+**Impacto:** `M0-bootstrap` e implementação em `apps/web`.
+
+### AD-004: Planejamento antecipado M1–M3 antes de M0 done (2026-08-14)
+
+**Decisão:** Planejar M1–M3 com M0 apenas `PLANNED` (não `✅ done`), em fila sequencial autorizada pelo usuário.
+**Motivo:** Usuário pediu planejamento de todos os marcos, um a um, sem nova aprovação entre itens.
+**Foundation:** —
+**Trade-off:** Specs de M1+ assumem stack/decisões do M0; se o implement de M0 divergir, planos posteriores podem precisar de ajuste.
+**Impacto:** ROADMAP marca features `PLANNED` antes da implementação de dependências.
+
+### AD-005: Auth.js Credentials + bcrypt + JWT cookie (2026-08-14)
+
+**Decisão:** M1 auth usa Auth.js (Credentials), bcrypt e sessão JWT em cookie HTTP-only.
+**Motivo:** Alinhado ao STACK; MVP sem IdP externo.
+**Foundation:** STACK · RF-001/002
+**Trade-off:** Sessões em DB ficam de fora no MVP.
+**Impacto:** `M1-autenticacao-e-sessao`.
+
+### AD-006: Despesa em centavos + `archived_at` (2026-08-14)
+
+**Decisão:** `amount_cents` (int > 0); status via `archived_at` nullable.
+**Motivo:** Precisão monetária e BR-007/008.
+**Foundation:** CONSTITUTION · BUSINESS-RULES
+**Trade-off:** Conversão BRL na UI obrigatória.
+**Impacto:** M2/M3 queries e contratos.
+
+### AD-007: Cross-user retorna 404 (2026-08-14)
+
+**Decisão:** Recurso de outro usuário ou inexistente → 404 (não 403).
+**Motivo:** Privacidade (não enumerar IDs).
+**Foundation:** RF-003 · BR-003
+**Impacto:** Helpers de ownership e testes M1/M2.
 
 ---
 
@@ -44,4 +83,10 @@
 
 ## Todos
 
-- [ ] Planejar M0 (`coe-sdd-plan M0`)
+- [x] Planejar M0 (`coe-sdd-plan M0`) → `.specs/features/M0-bootstrap/`
+- [x] Planejar M1 Autenticação e sessão → `.specs/features/M1-autenticacao-e-sessao/`
+- [x] Planejar M1 Isolamento por usuário → `.specs/features/M1-isolamento-por-usuario/`
+- [x] Planejar M2 Cadastro e ciclo de vida da despesa → `.specs/features/M2-cadastro-e-ciclo-de-vida-da-despesa/`
+- [x] Planejar M2 Listagem, filtros e categorias → `.specs/features/M2-listagem-filtros-e-categorias/`
+- [x] Planejar M3 Resumo por período → `.specs/features/M3-resumo-por-periodo/`
+- [ ] Implementar M0 (`coe-sdd-implement M0-bootstrap`)

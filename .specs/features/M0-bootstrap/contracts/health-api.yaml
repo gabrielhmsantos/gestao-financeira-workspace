@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Controle de Despesas — Health (M0)
+  version: 0.1.0
+  description: Contrato mínimo de disponibilidade da aplicação full-stack em apps/web.
+servers:
+  - url: http://localhost:3000
+    description: Desenvolvimento local
+paths:
+  /api/health:
+    get:
+      operationId: getHealth
+      summary: Verificação de disponibilidade
+      description: |
+        Retorna status da aplicação. Quando a checagem de SQLite estiver habilitada
+        e o banco estiver inacessível, responde 503.
+      tags:
+        - Health
+      responses:
+        "200":
+          description: Aplicação disponível
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              examples:
+                ok:
+                  value:
+                    status: ok
+                    timestamp: "2026-08-14T17:00:00.000Z"
+        "503":
+          description: Aplicação indisponível ou dependência crítica falhou
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              examples:
+                db_down:
+                  value:
+                    status: error
+                    timestamp: "2026-08-14T17:00:00.000Z"
+                    checks:
+                      database: down
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - timestamp
+      properties:
+        status:
+          type: string
+          enum: [ok, error]
+        timestamp:
+          type: string
+          format: date-time
+          description: Instantâneo UTC
+        checks:
+          type: object
+          additionalProperties:
+            type: string
+            enum: [up, down]
+          description: Checagens opcionais (ex. database)

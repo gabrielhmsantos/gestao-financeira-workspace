@@ -1,7 +1,7 @@
 # Roadmap
 
 **Marco atual:** M0 — Bootstrap
-**Status:** Planejamento
+**Status:** Todos os marcos/features do MVP estão PLANNED — próximo: `coe-sdd-implement M0-bootstrap`
 
 ---
 
@@ -9,6 +9,7 @@
 
 **Objetivo:** Tornar a aplicação Next.js full-stack executável localmente (scaffold, SQLite, lint/testes, health) em `apps/web`
 **Dependências:** —
+**Status:** PLANNED ✅ → [`.specs/features/M0-bootstrap/`](../features/M0-bootstrap/)
 
 **Escopo:**
 
@@ -28,7 +29,7 @@
 
 ### Features
 
-**Autenticação e sessão** - NOT STARTED
+**Autenticação e sessão** - PLANNED ✅ → [`.specs/features/M1-autenticacao-e-sessao/`](../features/M1-autenticacao-e-sessao/)
 
 - RF-001 Criar conta com nome, e-mail e senha, rejeitando e-mail já cadastrado
 - RF-002 Autenticar com e-mail/senha e encerrar sessão (logout)
@@ -36,7 +37,7 @@
 - BR-002 Garantir unicidade de e-mail no cadastro
 - BR-011 Auditar criação de conta e falhas relevantes de login
 
-**Isolamento por usuário** - NOT STARTED
+**Isolamento por usuário** - PLANNED ✅ → [`.specs/features/M1-isolamento-por-usuario/`](../features/M1-isolamento-por-usuario/)
 
 - RF-003 Isolar dados por usuário em consultas e mutações
 - BR-003 Isolar dados por proprietário
@@ -52,7 +53,7 @@
 
 ### Features
 
-**Cadastro e ciclo de vida da despesa** - NOT STARTED
+**Cadastro e ciclo de vida da despesa** - PLANNED ✅ → [`.specs/features/M2-cadastro-e-ciclo-de-vida-da-despesa/`](../features/M2-cadastro-e-ciclo-de-vida-da-despesa/)
 
 - RF-004 Cadastrar despesa com descrição, valor > 0, data e categoria do catálogo
 - RF-006 Editar despesa ativa do proprietário
@@ -64,7 +65,7 @@
 - BR-008 Arquivar em vez de excluir fisicamente
 - BR-011 Auditar criação, edição e arquivamento de despesa
 
-**Listagem, filtros e categorias** - NOT STARTED
+**Listagem, filtros e categorias** - PLANNED ✅ → [`.specs/features/M2-listagem-filtros-e-categorias/`](../features/M2-listagem-filtros-e-categorias/)
 
 - RF-005 Listar despesas ativas com filtro por período e categoria
 - RF-009 Exibir categorias fixas do MVP
@@ -80,7 +81,7 @@
 
 ### Features
 
-**Resumo por período** - NOT STARTED
+**Resumo por período** - PLANNED ✅ → [`.specs/features/M3-resumo-por-periodo/`](../features/M3-resumo-por-periodo/)
 
 - RF-008 Consultar resumo (total, quantidade, total e participação por categoria) no período selecionado
 - BR-009 Calcular resumo apenas no período e sobre despesas ativas
