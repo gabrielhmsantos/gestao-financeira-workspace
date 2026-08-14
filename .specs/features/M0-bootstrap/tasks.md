@@ -4,7 +4,7 @@ description: "Tasks M0 — Bootstrap da aplicação Next.js full-stack em apps/w
 
 # Tasks: Bootstrap
 
-**Marco:** M0 | **Status:** planejado | **Depende de:** —
+**Marco:** M0 | **Status:** concluído | **Depende de:** —
 **Foundation:** STACK.md · CONSTITUTION (padrões técnicos)
 **Política de testes:** Vitest unit/integration + Playwright E2E smoke; gates concretos por task
 
@@ -38,9 +38,9 @@ T007,T008,T009 → T010 → T011 → T012
 
 **Objetivo:** Scaffold Next.js e toolchain base em `apps/web`.
 
-- [ ] T001 [INFRA] Substituir placeholder e criar app Next.js (App Router) + TypeScript em `apps/web/`
-- [ ] T002 [INFRA] Configurar Tailwind CSS e inicializar shadcn/ui em `apps/web/`
-- [ ] T003 [INFRA] Definir estrutura de pastas (app, components, lib) e página placeholder pt-BR em `apps/web/src/app/` (ou `app/`)
+- [x] T001 [INFRA] Substituir placeholder e criar app Next.js (App Router) + TypeScript em `apps/web/`
+- [x] T002 [INFRA] Configurar Tailwind CSS e inicializar shadcn/ui em `apps/web/`
+- [x] T003 [INFRA] Definir estrutura de pastas (app, components, lib) e página placeholder pt-BR em `apps/web/src/app/` (ou `app/`)
 
 **✅ Checkpoint:** `npm run dev` sobe a app com Tailwind/shadcn utilizáveis.
 
@@ -50,10 +50,10 @@ T007,T008,T009 → T010 → T011 → T012
 
 **Objetivo:** Env, qualidade e persistência antes das US de verificação.
 
-- [ ] T004 [P] [INFRA] Configurar ESLint + Prettier (ou formatter do Next) e scripts `lint`/`format` em `apps/web/`
-- [ ] T005 [P] [INFRA] Criar `.env.example` com `DATABASE_URL` (SQLite) e documentar Node em `apps/web/README.md`
-- [ ] T006 [INFRA] Adicionar Prisma + SQLite, `schema.prisma` sem models de domínio e client em `apps/web/src/lib/db.ts`
-- [ ] T007 [INFRA] Criar e aplicar migration baseline em `apps/web/prisma/migrations/`
+- [x] T004 [P] [INFRA] Configurar ESLint + Prettier (ou formatter do Next) e scripts `lint`/`format` em `apps/web/`
+- [x] T005 [P] [INFRA] Criar `.env.example` com `DATABASE_URL` (SQLite) e documentar Node em `apps/web/README.md`
+- [x] T006 [INFRA] Adicionar Prisma + SQLite, `schema.prisma` sem models de domínio e client em `apps/web/src/lib/db.ts`
+- [x] T007 [INFRA] Criar e aplicar migration baseline em `apps/web/prisma/migrations/`
 
 **✅ Checkpoint:** `npx prisma migrate deploy` (ou `dev`) aplica sem erro; client conecta.
 
@@ -65,7 +65,7 @@ T007,T008,T009 → T010 → T011 → T012
 **Story points:** 8
 **Teste independente:** `npm run build` e `npm run dev` com UI base.
 
-- [ ] T008 [US1] Garantir layout/página inicial e imports shadcn de sanidade em `apps/web/src/app/` e `apps/web/src/components/`
+- [x] T008 [US1] Garantir layout/página inicial e imports shadcn de sanidade em `apps/web/src/app/` e `apps/web/src/components/`
 
 **T008 Done when:**
 - Build de produção conclui sem erro
@@ -82,7 +82,7 @@ T007,T008,T009 → T010 → T011 → T012
 **Story points:** 5
 **Teste independente:** teste de conectividade Prisma.
 
-- [ ] T009 [P] [US2] Implementar smoke de conectividade Prisma (Vitest integration) em `apps/web/tests/` (ou equivalente)
+- [x] T009 [P] [US2] Implementar smoke de conectividade Prisma (Vitest integration) em `apps/web/tests/` (ou equivalente)
 
 **T009 Done when:**
 - Suite sobe DB de teste/arquivo temp ou usa env de teste
@@ -99,9 +99,9 @@ T007,T008,T009 → T010 → T011 → T012
 **Story points:** 5
 **Teste independente:** curl/fetch health + e2e.
 
-- [ ] T010 [US3] Implementar `GET /api/health` conforme `contracts/health-api.yaml` em `apps/web/src/app/api/health/route.ts`
-- [ ] T011 [US3] Configurar Vitest + teste unitário mínimo (ex.: util ou parser de health) em `apps/web/`
-- [ ] T012 [US3] Configurar Playwright e E2E smoke que acessa `/api/health` (status 200) em `apps/web/`
+- [x] T010 [US3] Implementar `GET /api/health` conforme `contracts/health-api.yaml` em `apps/web/src/app/api/health/route.ts`
+- [x] T011 [US3] Configurar Vitest + teste unitário mínimo (ex.: util ou parser de health) em `apps/web/`
+- [x] T012 [US3] Configurar Playwright e E2E smoke que acessa `/api/health` (status 200) em `apps/web/`
 
 **T010 Done when:**
 - 200 + JSON `{ status, timestamp }` com DB up

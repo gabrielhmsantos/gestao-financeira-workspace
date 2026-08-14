@@ -1,7 +1,7 @@
 # Roadmap
 
-**Marco atual:** M0 — Bootstrap
-**Status:** Todos os marcos/features do MVP estão PLANNED — próximo: `coe-sdd-implement M0-bootstrap`
+**Marco atual:** M1 — Autenticação e isolamento
+**Status:** M0 ✅ done — próximo: `coe-sdd-implement M1-autenticacao-e-sessao`
 
 ---
 
@@ -9,7 +9,7 @@
 
 **Objetivo:** Tornar a aplicação Next.js full-stack executável localmente (scaffold, SQLite, lint/testes, health) em `apps/web`
 **Dependências:** —
-**Status:** PLANNED ✅ → [`.specs/features/M0-bootstrap/`](../features/M0-bootstrap/)
+**Status:** ✅ done → [`.specs/features/M0-bootstrap/`](../features/M0-bootstrap/)
 
 **Escopo:**
 

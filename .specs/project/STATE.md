@@ -1,7 +1,7 @@
 # Estado
 
 **Última atualização:** 2026-08-14
-**Trabalho atual:** Planejamento MVP completo (M0–M3). Próximo: `coe-sdd-implement M0-bootstrap` em `apps/web` (branch `feat/M0-bootstrap`).
+**Trabalho atual:** M0-bootstrap concluído em `apps/web` (`feat/M0-bootstrap`). Próximo: `coe-sdd-implement M1-autenticacao-e-sessao`.
 
 ---
 
@@ -72,6 +72,14 @@
 
 ## Lições aprendidas (L-NNN)
 
+### L-001: Playwright webServer precisa de build (2026-08-14)
+
+Em checkout limpo, `npm run start` sozinho falha no smoke E2E. Configurar `webServer.command` como `npm run build && npm run start` (ou equivalente) para o gate T012/quickstart.
+
+### L-002: Vitest não deve incluir specs Playwright (2026-08-14)
+
+`tests/e2e/*.spec.ts` conflitam com Vitest se o include for amplo demais. Restringir Vitest a `tests/unit` e `tests/integration`.
+
 ---
 
 ## Ideias adiadas
@@ -89,4 +97,6 @@
 - [x] Planejar M2 Cadastro e ciclo de vida da despesa → `.specs/features/M2-cadastro-e-ciclo-de-vida-da-despesa/`
 - [x] Planejar M2 Listagem, filtros e categorias → `.specs/features/M2-listagem-filtros-e-categorias/`
 - [x] Planejar M3 Resumo por período → `.specs/features/M3-resumo-por-periodo/`
-- [ ] Implementar M0 (`coe-sdd-implement M0-bootstrap`)
+- [x] Implementar M0 (`coe-sdd-implement M0-bootstrap`)
+- [ ] Implementar M1-autenticacao-e-sessao
+- [ ] Implementar M1-isolamento-por-usuario
