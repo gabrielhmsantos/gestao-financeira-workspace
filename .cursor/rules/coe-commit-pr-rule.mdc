@@ -1,0 +1,43 @@
+---
+description: Gate commit/PR behind an approved code review; Conventional Commits imperative messages
+alwaysApply: true
+---
+
+# Commit / PR gates
+
+## Code-review gate (required)
+
+Any non-empty change set must pass an **approved code review** before commit or PR.
+
+**Approved** = review completed **in this session** for the paths/range involved, with no unresolved blocking findings (fix Critical / Important equivalents first; nits may remain). Prefer the project’s code-review workflow when one exists; otherwise run an equivalent Spec × Standards (or quality + requirements) review before proceeding.
+
+### Before commit
+
+1. Inspect `git status` and `git diff` (staged + unstaged to include).
+2. If there is a non-empty diff: **STOP** unless those paths were covered by an approved review this session.
+3. If not reviewed: say so, run the review, fix blockers, confirm approval, **then** commit.
+4. Do not use `--no-verify` to bypass this rule.
+
+**Narrow exception:** commit **only** documentation, specs, or tooling/config markdown with **no** application source changes. Never skip review for application code.
+
+### Before opening a PR
+
+1. PR range = `git diff <base>...HEAD` (usually `main` / default branch).
+2. That entire range must have an approved review this session (or the user confirms the same range was already reviewed in-session).
+3. Otherwise refuse creating the PR, run review on the PR range, fix blockers, then create the PR.
+
+## Commit messages
+
+Subject: `type(scope): imperative summary`
+
+- Completes: *If applied, this commit will \<summary\>*
+- Imperative: `add`, `fix`, `wire`, `remove` — not `added` / `fixes` / `updating`
+- No trailing period; subject ~50–72 chars
+- Optional body: why (not a file list); wrap ~72 cols
+- Good: `feat(api): add load-data endpoint for catalog sync`
+- Bad: `Added load data` / `WIP` / `fix stuff`
+
+## PR title and body
+
+- **Title:** same Conventional Commits + imperative rules (squash-friendly).
+- **Body:** Summary (1–3 bullets) + Test plan; why; link the tracker issue when known.
